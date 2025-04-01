@@ -7,11 +7,7 @@ struct Cli {
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let result = std::fs::read_to_string("test.txt");
-    let content = match result {
-        Ok(content) => { content },
-        Err(error) => { return Err(error.into()); },
-    };
+    let content = std::fs::read_to_string("test.txt")?;
     println!("file content: {}", content);
     Ok(())
 }
