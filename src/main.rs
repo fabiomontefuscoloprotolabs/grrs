@@ -6,8 +6,12 @@ struct Cli {
     path: std::path::PathBuf,
 }
 
-fn main() {
-    let args = Cli::parse();
-
-    println!("pattern: {:?}, path: {:?}", args.pattern, args.path);
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let result = std::fs::read_to_string("test.txt");
+    let content = match result {
+        Ok(content) => { content },
+        Err(error) => { return Err(error.into()); },
+    };
+    println!("file content: {}", content);
+    Ok(())
 }
